@@ -1,22 +1,32 @@
 [
-  {"id": 1, "bed": "101", "complexity": 3},
-  {"id": 2, "bed": "102", "complexity": 5},
-  {"id": 3, "bed": "103", "complexity": 2},
-  {"id": 4, "bed": "104", "complexity": 4},
-  {"id": 5, "bed": "105", "complexity": 6},
-  {"id": 6, "bed": "106", "complexity": 3},
-  {"id": 7, "bed": "107", "complexity": 5},
-  {"id": 8, "bed": "108", "complexity": 2},
-  {"id": 9, "bed": "109", "complexity": 3},
-  {"id": 10, "bed": "110", "complexity": 4},
-    {"id": 11, "bed": "111", "complexity": 5},
-    {"id": 12, "bed": "112", "complexity": 6},
-    {"id": 13, "bed": "113", "complexity": 2},
-    {"id": 14, "bed": "114", "complexity": 3},
-    {"id": 15, "bed": "115", "complexity": 4},
-    {"id": 16, "bed": "116", "complexity": 5},
-    {"id": 17, "bed": "117", "complexity": 6},
-    {"id": 18, "bed": "118", "complexity": 2},
-    {"id": 19, "bed": "119", "complexity": 3},
-    {"id": 20, "bed": "120", "complexity": 4}
+    {
+        "id": 1,
+        "bed": "101",
+        "complexity": 3
+    },
+    {
+        "id": 2,
+        "bed": "102",
+        "complexity": 3
+    },
+    {
+        "id": 3,
+        "bed": "103",
+        "complexity": 4
+    },
+    {
+        "id": 4,
+        "bed": "104",
+        "complexity": 4
+    },
+    {
+        "id": 5,
+        "bed": "105",
+        "complexity": 3
+    },
+    {
+        "id": 6,
+        "bed": "106",
+        "complexity": 4
+    }
 ]
