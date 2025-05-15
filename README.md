@@ -1,0 +1,45 @@
+# Nurse Scheduling System
+
+## Overview
+A Python-based solution to automate nurse scheduling for the next day based on:
+- Nurse availability and capacity.
+- Patient bed assignments.
+- Patient complexity of care.
+
+## Features
+- Assigns nurses to patients while respecting complexity and capacity constraints.
+- Prioritizes continuity of care.
+- Generates optimal schedules using Google OR-Tools.
+
+## Project Structure
+```plaintext
+nurse_scheduler/
+├── data/               # Input data for nurses, patients, and history
+├── scheduler/          # Core scheduling logic
+├── interface/          # CLI and optional web interface
+├── tests/              # Unit tests
+├── requirements.txt    # Python dependencies
+└── README.md           # Documentation
+```
+
+## Usage
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   export PYTHONPATH=$(pwd):$PYTHONPATH
+   ```
+
+2. Run the CLI:
+   ```bash
+   python interface/cli.py
+   ```
+
+3. View the generated schedule in the console.
+
+## Dependencies
+- Python 3.8+
+- OR-Tools
+
+## Future Enhancements
+- Add a web-based interface for easier data entry and schedule viewing.
+- Integrate with hospital management systems.

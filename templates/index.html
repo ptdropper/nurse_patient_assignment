@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurse Scheduling</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Nurse Scheduling System</h1>
+        <form method="POST">
+            <h2>Update Patient Complexity</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Bed</th>
+                        <th>Complexity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.id }}</td>
+                        <td>{{ patient.bed }}</td>
+                        <td>
+                            <input type="number" name="complexity_{{ patient.id }}" value="{{ patient.complexity }}" min="1" max="10">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit">Generate Schedule</button>
+        </form>
+
+        {% if schedule %}
+        <h2>Generated Schedule</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nurse</th>
+                    <th>Assigned Patients</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in schedule %}
+                <tr>
+                    <td>{{ entry.nurse }}</td>
+                    <td>{{ entry.patients | join(", ") }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
