@@ -32,6 +32,6 @@ def index():
 
 if __name__ == "__main__":
     # auto reload for convenience but breaks PyCharm debugger
-    #app.run(debug=True)
+    app.run(debug=True)
     # provide for PyCharm debugging by telling Flask to not use reloader
-    app.run(debug=True, use_reloader=False)
+    #app.run(debug=True, use_reloader=False)

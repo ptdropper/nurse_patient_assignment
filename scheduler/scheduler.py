@@ -60,8 +60,9 @@ def assign_nurses_to_patients(nurses, patients, history):
                                       [row + (1 - row_used[row]) * (max(row_numbers)) for row in row_numbers])
         model.AddMaxEquality(max_row, [row_used[row] * row for row in row_numbers])
 
-        # Require that max_row - min_row <= 1 if the nurse has any assigned patients
-        model.Add(max_row - min_row <= 3).OnlyEnforceIf(row_used[row] for row in row_numbers)
+        # Require that max_row - min_row <= distance_max if the nurse has any assigned patients
+        room_distance_max=2
+        model.Add(max_row - min_row < room_distance_max).OnlyEnforceIf(row_used[row] for row in row_numbers)
 
     # Each patient assigned to exactly one nurse
     for patient in patients:
