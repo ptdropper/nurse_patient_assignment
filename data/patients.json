@@ -3,19 +3,19 @@
         "id": 1,
         "bed": "101",
         "row": 1,
-        "complexity": 4
+        "complexity": 3
     },
     {
         "id": 2,
         "bed": "102",
         "row": 1,
-        "complexity": 4
+        "complexity": 3
     },
     {
         "id": 3,
         "bed": "103",
         "row": 2,
-        "complexity": 4
+        "complexity": 3
     },
     {
         "id": 4,
