@@ -1,5 +1,11 @@
 [
   {"id": 1, "name": "Nurse A", "max_capacity": 20},
   {"id": 2, "name": "Nurse B", "max_capacity": 20},
-  {"id": 3, "name": "Nurse C", "max_capacity": 20}
+  {"id": 3, "name": "Nurse C", "max_capacity": 20},
+  {"id": 4, "name": "Nurse D", "max_capacity": 20},
+  {"id": 5, "name": "Nurse E", "max_capacity": 20},
+  {"id": 6, "name": "Nurse F", "max_capacity": 20},
+  {"id": 7, "name": "Nurse G", "max_capacity": 20},
+  {"id": 8, "name": "Nurse H", "max_capacity": 20}
+
 ]
