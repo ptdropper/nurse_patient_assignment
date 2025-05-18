@@ -2,31 +2,37 @@
     {
         "id": 1,
         "bed": "101",
+        "nearest_bed": "102",
         "complexity": 3
     },
     {
         "id": 2,
         "bed": "102",
+        "nearest_bed": "101",
         "complexity": 3
     },
     {
         "id": 3,
         "bed": "103",
-        "complexity": 4
+        "nearest_bed": "104",
+        "complexity": 3
     },
     {
         "id": 4,
         "bed": "104",
+        "nearest_bed": "103",
         "complexity": 4
     },
     {
         "id": 5,
         "bed": "105",
-        "complexity": 3
+        "nearest_bed": "106",
+        "complexity": 4
     },
     {
         "id": 6,
         "bed": "106",
+        "nearest_bed": "105",
         "complexity": 4
     }
 ]

@@ -45,6 +45,16 @@ def assign_nurses_to_patients(nurses, patients, history):
             sum(assignments[(nurse['id'], patient['id'])] for nurse in nurses) == 1
         )
 
+    # Ensure that the distance of each patient room is within the nurse's range
+    # TODO set the distance to the nearest bed to be a parameter set by the user
+    distance_between_rooms=2
+    for patient in patients:
+        print("patient = ", patient, " distance =", abs(int(patient['bed']) - int(patient['nearest_bed'])))
+        model.Add(
+            sum(assignments[(nurse['id'], patient['id'])] for patient in patients
+                if abs(int(patient['bed']) - int(patient['nearest_bed']))) <= distance_between_rooms
+        )
+
     # Objective: Maximize continuity of care
     continuity = []
     for (nurse_id, patient_id), assigned in assignments.items():
