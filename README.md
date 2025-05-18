@@ -1,13 +1,16 @@
-# Nurse Scheduling System
+# Nurse Patient Assignment 
 
 ## Overview
-A Python-based solution to automate nurse scheduling for the next day based on:
+A Python-based solution to suggest nurse-patient assignments for the next shift based on:
 - Nurse availability and capacity.
 - Patient bed assignments.
 - Patient complexity of care.
+- Previous assignment consistency.
+- Room availability.
+- Distance between nurses and patient rooms.
 
 ## Features
-- Assigns nurses to patients while respecting complexity and capacity constraints.
+- Assigns nurses to patients and rooms while respecting complexity and capacity constraints.
 - Prioritizes continuity of care.
 - Generates optimal schedules using Google OR-Tools.
 
@@ -40,6 +43,3 @@ nurse_scheduler/
 - Python 3.8+
 - OR-Tools
 
-## Future Enhancements
-- Add a web-based interface for easier data entry and schedule viewing.
-- Integrate with hospital management systems.
