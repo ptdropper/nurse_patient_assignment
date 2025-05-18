@@ -31,4 +31,7 @@ def index():
     return render_template("index.html", patients=patients, schedule=[])
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # auto reload for convenience but breaks PyCharm debugger
+    #app.run(debug=True)
+    # provide for PyCharm debugging by telling Flask to not use reloader
+    app.run(debug=True, use_reloader=False)

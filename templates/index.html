@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurse Scheduling</title>
+    <title>Nurse Patient Assignments</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -16,6 +16,7 @@
                     <tr>
                         <th>Patient ID</th>
                         <th>Bed</th>
+                        <th>Row</th>
                         <th>Complexity</th>
                     </tr>
                 </thead>
@@ -24,18 +25,19 @@
                     <tr>
                         <td>{{ patient.id }}</td>
                         <td>{{ patient.bed }}</td>
+                        <td>{{ patient.row }}</td>
                         <td>
-                            <input type="number" name="complexity_{{ patient.id }}" value="{{ patient.complexity }}" min="1" max="10">
+                            <input type="number" name="complexity_{{ patient.id }}" value="{{ patient.complexity }}" min="3" max="5">
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <button type="submit">Generate Schedule</button>
+            <button type="submit">Generate Assignments</button>
         </form>
 
         {% if schedule %}
-        <h2>Generated Schedule</h2>
+        <h2>Generated Assignments</h2>
         <table>
             <thead>
                 <tr>

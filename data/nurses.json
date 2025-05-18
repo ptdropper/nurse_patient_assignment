@@ -1,5 +1,5 @@
 [
-  {"id": 1, "name": "Nurse A", "max_capacity": 15},
-  {"id": 2, "name": "Nurse B", "max_capacity": 12}
-
+  {"id": 1, "name": "Nurse A", "max_capacity": 20},
+  {"id": 2, "name": "Nurse B", "max_capacity": 20},
+  {"id": 3, "name": "Nurse C", "max_capacity": 20}
 ]

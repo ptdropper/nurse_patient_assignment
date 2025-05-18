@@ -2,37 +2,55 @@
     {
         "id": 1,
         "bed": "101",
-        "nearest_bed": "102",
-        "complexity": 3
+        "row": 1,
+        "complexity": 4
     },
     {
         "id": 2,
         "bed": "102",
-        "nearest_bed": "101",
-        "complexity": 3
+        "row": 1,
+        "complexity": 4
     },
     {
         "id": 3,
         "bed": "103",
-        "nearest_bed": "104",
-        "complexity": 3
+        "row": 2,
+        "complexity": 4
     },
     {
         "id": 4,
         "bed": "104",
-        "nearest_bed": "103",
+        "row": 2,
         "complexity": 4
     },
     {
         "id": 5,
         "bed": "105",
-        "nearest_bed": "106",
+        "row": 3,
         "complexity": 4
     },
     {
         "id": 6,
         "bed": "106",
-        "nearest_bed": "105",
+        "row": 3,
+        "complexity": 4
+    },
+    {
+        "id": 7,
+        "bed": "107",
+        "row": 4,
+        "complexity": 4
+    },
+    {
+        "id": 8,
+        "bed": "108",
+        "row": 4,
+        "complexity": 4
+    },
+    {
+        "id": 9,
+        "bed": "109",
+        "row": 5,
         "complexity": 4
     }
 ]

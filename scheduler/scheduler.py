@@ -25,34 +25,48 @@ def assign_nurses_to_patients(nurses, patients, history):
             <= nurse['max_capacity']
         )
 
-        # Ensure that if a nurse is assigned a patient with complexity 3,
-        # they are only assigned other patients with complexity 3.
+        # Complexity-3 logic (same as previous)
         complexity_3_patients = [
             assignments[(nurse['id'], patient['id'])] for patient in patients if patient['complexity'] == 3
         ]
         other_patients = [
             assignments[(nurse['id'], patient['id'])] for patient in patients if patient['complexity'] != 3
         ]
-
-        # If a nurse is assigned any patient with complexity 3, force all other assignments to be 0.
         for complexity_3 in complexity_3_patients:
             for other in other_patients:
                 model.Add(complexity_3 + other <= 1)
 
-    # Ensure that each patient is assigned to exactly one nurse
+        # --- NEW: Row constraint ---
+        # For each nurse, collect row numbers of assigned patients
+        row_numbers = list(set(patient['row'] for patient in patients))
+        row_used = {}
+        for row in row_numbers:
+            row_used[row] = model.NewBoolVar(f"nurse_{nurse['id']}_row_{row}_used")
+            # If nurse is assigned any patient in this row, row_used[row] = 1
+            model.AddMaxEquality(
+                row_used[row],
+                [assignments[(nurse['id'], patient['id'])] for patient in patients if patient['row'] == row]
+                if any(patient['row'] == row for patient in patients)
+                else [model.NewConstant(0)]
+            )
+
+        # The row numbers used by this nurse
+        row_expr = [row * row_used[row] for row in row_numbers]
+        # Compute min and max row values they are assigned to
+        min_row = model.NewIntVar(1, max(row_numbers), f"nurse_{nurse['id']}_minrow")
+        max_row = model.NewIntVar(1, max(row_numbers), f"nurse_{nurse['id']}_maxrow")
+        # Set min_row and max_row
+        model.AddMinEquality(min_row, [row for row in row_numbers for _ in (0,)] +
+                                      [row + (1 - row_used[row]) * (max(row_numbers)) for row in row_numbers])
+        model.AddMaxEquality(max_row, [row_used[row] * row for row in row_numbers])
+
+        # Require that max_row - min_row <= 1 if the nurse has any assigned patients
+        model.Add(max_row - min_row <= 3).OnlyEnforceIf(row_used[row] for row in row_numbers)
+
+    # Each patient assigned to exactly one nurse
     for patient in patients:
         model.Add(
             sum(assignments[(nurse['id'], patient['id'])] for nurse in nurses) == 1
-        )
-
-    # Ensure that the distance of each patient room is within the nurse's range
-    # TODO set the distance to the nearest bed to be a parameter set by the user
-    distance_between_rooms=3
-    for patient in patients:
-        print("patient = ", patient, " distance =", abs(int(patient['bed']) - int(patient['nearest_bed'])))
-        model.Add(
-            sum(assignments[(nurse['id'], patient['id'])] for patient in patients
-                if abs(int(patient['bed']) - int(patient['nearest_bed']))) <= distance_between_rooms
         )
 
     # Objective: Maximize continuity of care

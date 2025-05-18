@@ -34,6 +34,7 @@ nurse_scheduler/
 
 2. Run the CLI:
    ```bash
+   export PYTHONPATH=$(pwd):$PYTHONPATH
    python interface/cli.py
    ```
 
