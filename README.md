@@ -32,10 +32,10 @@ nurse_scheduler/
    export PYTHONPATH=$(pwd):$PYTHONPATH
    ```
 
-2. Run the CLI:
+2. Run the Web CLI:
    ```bash
    export PYTHONPATH=$(pwd):$PYTHONPATH
-   python interface/cli.py
+   python interface/web.py
    ```
 
 3. View the generated schedule in the console.
