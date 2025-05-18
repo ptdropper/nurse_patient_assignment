@@ -9,6 +9,14 @@ app = Flask(__name__, template_folder="../templates")
 def index():
     # Load data
     nurses, patients, history = load_data()
+    # Get max_row_diff from form, default to 1 if not set
+    if request.method == 'POST':
+        try:
+            max_row_diff = int(request.form.get('max_row_diff', 1))
+        except ValueError:
+            max_row_diff = 1
+    else:
+        max_row_diff = 1
 
     if request.method == "POST":
         # Update patient complexities from the form
@@ -16,19 +24,19 @@ def index():
             complexity = request.form.get(f"complexity_{patient['id']}")
             if complexity:
                 patient['complexity'] = int(complexity)
-
+        room_distance_max = request.form.get(f"room_distance_max_{patient['id']}")
         # Save updated patient data
         save_schedule(patients, filename="data/patients.json")
 
         # Generate the schedule
         try:
-            schedule = assign_nurses_to_patients(nurses, patients, history)
-            return render_template("index.html", patients=patients, schedule=schedule, success=True)
+            schedule = assign_nurses_to_patients(nurses, patients, history, max_row_diff=max_row_diff)
+            return render_template("index.html", patients=patients, schedule=schedule, success=True, max_row_diff=max_row_diff)
         except Exception as e:
-            return render_template("index.html", patients=patients, schedule=[], error=str(e))
+            return render_template("index.html", patients=patients, schedule=[], error=str(e), max_row_diff=max_row_diff)
     
     # Render the page with default data
-    return render_template("index.html", patients=patients, schedule=[])
+    return render_template("index.html", patients=patients, schedule=[], max_row_diff=max_row_diff)
 
 if __name__ == "__main__":
     # auto reload for convenience but breaks PyCharm debugger
