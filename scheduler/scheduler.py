@@ -26,6 +26,7 @@ def assign_nurses_to_patients(nurses, patients, history, max_row_diff):
         )
 
         # Complexity-3 logic (same as previous)
+        # If a nurse has a patient with complexity 3, they should be assigned only complexity 3
         complexity_3_patients = [
             assignments[(nurse['id'], patient['id'])] for patient in patients if patient['complexity'] == 3
         ]
@@ -36,21 +37,39 @@ def assign_nurses_to_patients(nurses, patients, history, max_row_diff):
             for other in other_patients:
                 model.Add(complexity_3 + other <= 1)
 
-        # --- NEW: Row constraint ---
+        # --- Row constraint ---
+        # Rooms are arranged in as rows down the hall, so we need to ensure that nurses do not
+        # have patients assigned to distant rows.
+        # Use max_row_diff to limit the distance between the rows of assigned patients.
+        # Example
+
+        # Row   ID numbers. (rooms are on each side of a hallway, left and right)
+        #  1    1 and 30
+        #  2    2 and 29
+        #  3    3 and 28
+        # ...
         # For each nurse, collect row numbers of assigned patients
+        #  Example patient data structure
+        #  patients{
+        #    "id": 2,
+        #    "bed": "102",
+        #    "row": 2,
+        #    "complexity": 3
+        # }
+        #
         row_numbers = list(set(patient['row'] for patient in patients))
         row_used = {}
         for row in row_numbers:
             row_used[row] = model.NewBoolVar(f"nurse_{nurse['id']}_row_{row}_used")
             # If nurse is assigned any patient in this row, row_used[row] = 1
-            model.AddMaxEquality(
+            model.AddMinEquality(
                 row_used[row],
                 [assignments[(nurse['id'], patient['id'])] for patient in patients if patient['row'] == row]
                 if any(patient['row'] == row for patient in patients)
                 else [model.NewConstant(0)]
             )
 
-        # The row numbers used by this nurse
+        # The row numbers used by this nurse assigned patients
         row_expr = [row * row_used[row] for row in row_numbers]
         # Compute min and max row values they are assigned to
         min_row = model.NewIntVar(1, max(row_numbers), f"nurse_{nurse['id']}_minrow")
@@ -61,6 +80,7 @@ def assign_nurses_to_patients(nurses, patients, history, max_row_diff):
         model.AddMaxEquality(max_row, [row_used[row] * row for row in row_numbers])
 
         # Require that max_row - min_row <= distance_max if the nurse has any assigned patients
+        # Find a way to force clustering
         model.Add(max_row - min_row < max_row_diff).OnlyEnforceIf(row_used[row] for row in row_numbers)
 
     # Each patient assigned to exactly one nurse
