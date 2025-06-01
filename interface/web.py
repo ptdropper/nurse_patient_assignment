@@ -12,11 +12,11 @@ def index():
     # Get max_row_diff from form, default to 1 if not set
     if request.method == 'POST':
         try:
-            max_row_diff = int(request.form.get('max_row_diff', 1))
+            max_row_difference = int(request.form.get('max_row_diff', 1))
         except ValueError:
-            max_row_diff = 1
+            max_row_difference = 1
     else:
-        max_row_diff = 1
+        max_row_difference = 99
 
     if request.method == "POST":
         # Update patient complexities from the form
@@ -30,13 +30,13 @@ def index():
 
         # Generate the schedule
         try:
-            schedule = assign_nurses_to_patients(nurses, patients, history, max_row_diff=max_row_diff)
-            return render_template("index.html", patients=patients, schedule=schedule, success=True, max_row_diff=max_row_diff)
+            schedule = assign_nurses_to_patients(nurses, patients, history, max_row_diff=max_row_difference)
+            return render_template("index.html", patients=patients, schedule=schedule, success=True, max_row_diff=max_row_difference)
         except Exception as e:
-            return render_template("index.html", patients=patients, schedule=[], error=str(e), max_row_diff=max_row_diff)
+            return render_template("index.html", patients=patients, schedule=[], error=str(e), max_row_diff=max_row_difference)
     
     # Render the page with default data
-    return render_template("index.html", patients=patients, schedule=[], max_row_diff=max_row_diff)
+    return render_template("index.html", patients=patients, schedule=[], max_row_diff=max_row_difference)
 
 if __name__ == "__main__":
     # auto reload for convenience but breaks PyCharm debugger

@@ -15,10 +15,11 @@
             <label for="max_row_diff"><strong>Maximum Allowed Row Difference for Assigned Patients:</strong></label>
             <input type="number" id="max_row_diff" name="max_row_diff" min="0" max="10" value="{{ max_row_diff|default(1) }}">
             <span style="font-size: 0.9em; color: #555;">
-                (Example: 1 means a nurse can only be assigned patients in adjacent rows, 0 means the same row only)
+                (Example: 1 means a nurse can only be assigned patients in adjacent rows, 2 means patients can be in the same row or one row apart, etc.)
             </span>
         </div>
         <button type="submit">Update Constraint</button>
+        <button type="submit">Generate Assignments</button>
         </form>
 
         <form method="POST">
@@ -45,7 +46,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <button type="submit">Generate Assignments</button>
+
         </form>
 
         {% if schedule %}
