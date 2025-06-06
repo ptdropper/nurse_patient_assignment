@@ -14,7 +14,7 @@ def index():
         try:
             max_row_difference = int(request.form.get('max_row_diff', 1))
         except ValueError:
-            max_row_difference = 1
+            max_row_difference = 20
     else:
         max_row_difference = 99
 
