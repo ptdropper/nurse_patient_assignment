@@ -4,20 +4,17 @@ from scheduler.solver import load_data
 from scheduler.scheduler import assign_nurses_to_patients
 from scheduler.utils import save_schedule
 
-app = Flask(__name__, static_folder='../static')
+app = Flask(__name__, static_folder='../static', template_folder="../templates")
 
 # Serve static HTML/CSS
 @app.route('/')
 def serve_index():
-    return send_from_directory('../static', 'index.html')
+    return send_from_directory('../templates', 'index.html')
 
 # Serve other static files
 @app.route('/<path:path>')
 def serve_static(path):
-    try:
-        return send_from_directory('../static', path)
-    except FileNotFoundError:
-        return "File not found", 404
+    return send_from_directory('../static', path)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
