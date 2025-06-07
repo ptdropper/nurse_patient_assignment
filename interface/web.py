@@ -14,7 +14,10 @@ def serve_index():
 # Serve other static files
 @app.route('/<path:path>')
 def serve_static(path):
-    return send_from_directory('../static', path)
+    try:
+        return send_from_directory('../static', path)
+    except FileNotFoundError:
+        return "File not found", 404
 
 @app.route("/", methods=["GET", "POST"])
 def index():
