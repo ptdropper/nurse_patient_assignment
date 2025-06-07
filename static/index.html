@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurse Patient Assignments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Nurse Patient Assignment</h1>
+
+        <form method="POST" action="{{ url_for('index') }}">
+        <div style="margin-bottom: 1em;">
+            <label for="max_row_diff"><strong>Maximum Allowed Row Difference for Assigned Patients:</strong></label>
+            <input type="number" id="max_row_diff" name="max_row_diff" min="0" max="10" value="{{ max_row_diff|default(1) }}">
+            <span style="font-size: 0.9em; color: #555;">
+                (Example: 1 means a nurse can only be assigned patients in adjacent rows, 2 means patients can be in the same row or one row apart, etc.)
+            </span>
+        </div>
+        <button type="submit">Update Constraint</button>
+
+        </form>
+
+        <form method="POST">
+            <h2>Update Patient Complexity</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Bed</th>
+                        <th>Row</th>
+                        <th>Complexity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.id }}</td>
+                        <td>{{ patient.bed }}</td>
+                        <td>{{ patient.row }}</td>
+                        <td>
+                            <input type="number" name="complexity_{{ patient.id }}" value="{{ patient.complexity }}" min="3" max="5">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit">Generate Assignments</button>
+        </form>
+
+        {% if schedule %}
+        <h2>Generated Assignments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nurse</th>
+                    <th>Assigned Patients</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in schedule %}
+                <tr>
+                    <td>{{ entry.nurse }}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>{{ entry.patients | join(", ") }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
