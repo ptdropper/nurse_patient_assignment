@@ -6,11 +6,6 @@ from scheduler.utils import save_schedule
 
 app = Flask(__name__, static_folder='../static', template_folder="../templates")
 
-# Serve static HTML/CSS
-#@app.route('/')
-#def index():
-#    return render_template('index.html')
-
 @app.route('/static/<path:path>')
 def serve_static(path):
     try:
