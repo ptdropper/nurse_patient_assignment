@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory
+from flask import Flask, render_template, request, send_from_directory
 import os
 from scheduler.solver import load_data
 from scheduler.scheduler import assign_nurses_to_patients
-from scheduler.utils import save_schedule
+from scheduler.utils import save_schedule, get_git_version
 
 app = Flask(__name__, static_folder='../static', template_folder="../templates")
 
@@ -22,6 +22,8 @@ def serve_favicon():
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    version = get_git_version()
+
     # Load data
     nurses, patients, history = load_data()
     # Get max_row_diff from form, default to 1 if not set
@@ -46,12 +48,13 @@ def index():
         # Generate the schedule
         try:
             schedule = assign_nurses_to_patients(nurses, patients, history, max_row_diff=max_row_difference)
-            return render_template("index.html", patients=patients, schedule=schedule, success=True, max_row_diff=max_row_difference)
+            return render_template("index.html", patients=patients, schedule=schedule, success=True, max_row_diff=max_row_difference, version=version)
         except Exception as e:
-            return render_template("index.html", patients=patients, schedule=[], error=str(e), max_row_diff=max_row_difference)
+            return render_template("index.html", patients=patients, schedule=[], error=str(e), max_row_diff=max_row_difference, version=version)
     
     # Render the page with default data
-    return render_template("index.html", patients=patients, schedule=[], max_row_diff=max_row_difference)
+    return render_template("index.html", patients=patients, schedule=[], max_row_diff=max_row_difference, version=version)
+
 
 if __name__ == "__main__":
     # auto reload for convenience but breaks PyCharm debugger
