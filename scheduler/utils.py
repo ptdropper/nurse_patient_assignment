@@ -9,6 +9,8 @@ def get_git_version():
         ).decode('utf-8').strip()
         return version
     except Exception:
+        print("version=", version)
+
         return "unknown"
 
 def save_schedule(schedule, filename='data/schedule.json'):
