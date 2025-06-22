@@ -1,16 +1,10 @@
 import json
-import subprocess
 
-def get_git_version():
+def get_static_version():
     try:
-        # Use 'git describe' to get the latest tag or commit
-        version = subprocess.check_output(
-            ['git', 'describe', '--tags', '--always'], stderr=subprocess.DEVNULL
-        ).decode('utf-8').strip()
-        return version
+        with open("version.txt") as f:
+            return f.read().strip()
     except Exception:
-        print("version=", version)
-
         return "unknown"
 
 def save_schedule(schedule, filename='data/schedule.json'):

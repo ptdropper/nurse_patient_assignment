@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, send_from_directory
 import os
 from scheduler.solver import load_data
 from scheduler.scheduler import assign_nurses_to_patients
-from scheduler.utils import save_schedule, get_git_version
+from scheduler.utils import save_schedule, get_static_version
 
 app = Flask(__name__, static_folder='../static', template_folder="../templates")
 
@@ -22,7 +22,7 @@ def serve_favicon():
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    version = get_git_version()
+    version = get_static_version()
 
     # Load data
     nurses, patients, history = load_data()
