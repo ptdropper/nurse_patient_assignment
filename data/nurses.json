@@ -1,8 +1,8 @@
 [
-  {"id": 1, "name": "Nurse 1", "max_capacity": 30},
+  {"id": 1, "name": "Nurse 1", "max_capacity": 3},
   {"id": 2, "name": "Nurse 2", "max_capacity": 30},
-  {"id": 3, "name": "Nurse 3", "max_capacity": 30},
-  {"id": 4, "name": "Nurse 4", "max_capacity": 30},
-  {"id": 5, "name": "Nurse 5", "max_capacity": 30},
-  {"id": 6, "name": "Nurse 6", "max_capacity": 30}
+  {"id": 3, "name": "Nurse 3", "max_capacity": 21},
+  {"id": 4, "name": "Nurse 4", "max_capacity": 21},
+  {"id": 5, "name": "Nurse 5", "max_capacity": 12},
+  {"id": 6, "name": "Nurse 6", "max_capacity": 12}
 ]

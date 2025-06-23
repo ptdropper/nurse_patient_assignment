@@ -24,17 +24,6 @@ def assign_nurses_to_patients(nurses, patients, history, max_row_diff):
             <= nurse['max_capacity']
         )
 
-        # Complexity-3 logic (exclusivity)
-        complexity_3_patients = [
-            assignments[(nurse['id'], patient['id'])] for patient in patients if patient['complexity'] == 3
-        ]
-        other_patients = [
-            assignments[(nurse['id'], patient['id'])] for patient in patients if patient['complexity'] != 3
-        ]
-        for c3 in complexity_3_patients:
-            for other in other_patients:
-                model.Add(c3 + other <= 1)
-
         # --- Row clustering constraint ---
         for patient in patients:
             # diff = |patient_row - center_row|
@@ -49,13 +38,6 @@ def assign_nurses_to_patients(nurses, patients, history, max_row_diff):
         model.Add(
             sum(assignments[(nurse['id'], patient['id'])] for nurse in nurses) == 1
         )
-
-    # Objective: Maximize continuity of care
-    continuity = []
-    for (nurse_id, patient_id), assigned in assignments.items():
-        if history.get(str(patient_id)) == nurse_id:
-            continuity.append(assigned)
-    model.Maximize(sum(continuity))
 
     # Solve the model
     solver = cp_model.CpSolver()

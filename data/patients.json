@@ -3,180 +3,180 @@
         "id": 1,
         "bed": "101",
         "row": 1,
-        "complexity": 5
+        "complexity": 3
     },
     {
         "id": 2,
         "bed": "102",
         "row": 2,
-        "complexity": 5
+        "complexity": 3
     },
     {
         "id": 3,
         "bed": "103",
         "row": 3,
-        "complexity": 5
+        "complexity": 3
     },
     {
         "id": 4,
         "bed": "104",
         "row": 4,
-        "complexity": 5
+        "complexity": 3
     },
     {
         "id": 5,
         "bed": "105",
         "row": 5,
-        "complexity": 5
+        "complexity": 2
     },
     {
         "id": 6,
         "bed": "106",
         "row": 6,
-        "complexity": 5
+        "complexity": 2
     },
     {
         "id": 7,
         "bed": "107",
         "row": 7,
-        "complexity": 5
+        "complexity": 2
     },
     {
         "id": 8,
         "bed": "108",
         "row": 8,
-        "complexity": 5
+        "complexity": 2
     },
     {
         "id": 9,
         "bed": "109",
         "row": 9,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 10,
         "bed": "110",
         "row": 10,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 11,
         "bed": "111",
         "row": 11,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 12,
         "bed": "112",
         "row": 12,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 13,
         "bed": "113",
         "row": 13,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 14,
         "bed": "114",
         "row": 14,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 15,
         "bed": "115",
         "row": 15,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 16,
         "bed": "116",
         "row": 15,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 17,
         "bed": "117",
         "row": 14,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 18,
         "bed": "118",
         "row": 13,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 19,
         "bed": "119",
         "row": 12,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 20,
         "bed": "120",
         "row": 11,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 21,
         "bed": "121",
         "row": 10,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 22,
         "bed": "122",
         "row": 9,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 23,
         "bed": "123",
         "row": 8,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 24,
         "bed": "124",
         "row": 7,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 25,
         "bed": "125",
         "row": 6,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 26,
         "bed": "126",
         "row": 5,
-        "complexity": 5
+        "complexity": 1
     },
     {
         "id": 27,
         "bed": "127",
         "row": 4,
-        "complexity": 5
+        "complexity": 2
     },
     {
         "id": 28,
         "bed": "128",
         "row": 3,
-        "complexity": 5
+        "complexity": 2
     },
     {
         "id": 29,
         "bed": "129",
         "row": 2,
-        "complexity": 5
+        "complexity": 2
     },
     {
         "id": 30,
         "bed": "130",
         "row": 1,
-        "complexity": 5
+        "complexity": 3
     }
 ]
