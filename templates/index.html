@@ -23,30 +23,57 @@
         </form>
 
         <form method="POST">
-            <h2>Update Patient Complexity</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Patient ID</th>
-                        <th>Bed</th>
-                        <th>Row</th>
-                        <th>Complexity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for patient in patients %}
-                    <tr>
-                        <td>{{ patient.id }}</td>
-                        <td>{{ patient.bed }}</td>
-                        <td>{{ patient.row }}</td>
-                        <td>
-                            <input type="number" name="complexity_{{ patient.id }}" value="{{ patient.complexity }}" min="1" max="3">
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <button type="submit">Generate Assignments</button>
+           <h2>Update Patient Complexity</h2>
+<div style="display: flex; gap: 2em;">
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Patient ID</th>
+                <th>Bed</th>
+                <th>Row</th>
+                <th>Complexity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients[:15] %}
+            <tr>
+                <td>{{ patient.id }}</td>
+                <td>{{ patient.bed }}</td>
+                <td>{{ patient.row }}</td>
+                <td>
+                    <input type="number" name="complexity_{{ patient.id }}" value="{{ patient.complexity }}" min="1" max="3">
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Patient ID</th>
+                <th>Bed</th>
+                <th>Row</th>
+                <th>Complexity</th>
+            </tr>
+        </thead>
+        <tbody>
+           {% for i in range(30, 15, -1) %}
+              {% set idx = i - 1 %}
+              <tr>
+                <td>{{ patients[idx].id }}</td>
+                <td>{{ patients[idx].bed }}</td>
+                <td>{{ patients[idx].row }}</td>
+                <td>
+                  <input type="number" name="complexity_{{ patients[idx].id }}" value="{{ patients[idx].complexity }}" min="1" max="3">
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<button type="submit">Generate Assignments</button>
         </form>
 
         {% if schedule %}
