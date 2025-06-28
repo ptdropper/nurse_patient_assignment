@@ -11,6 +11,37 @@
     <div class="container">
         <h1>Nurse Patient Assignment</h1>
 
+        <h2>Set Nurse Maximum Capacity</h2>
+        <form method="POST" action="{{ url_for('nurse_capacity') }}">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nurse Name</th>
+                <th>Max Capacity (0-30)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in range(1, 7) %}
+              <tr>
+                <td>{{ i }}</td>
+                <td>
+                  <input type="text" name="nurse_name_{{ i }}" placeholder="Nurse {{ i }}" value="{{ nurses[i-1].name if nurses and nurses[i-1] else '' }}">
+                </td>
+                <td>
+                  <select name="nurse_capacity_{{ i }}">
+                    {% for val in range(0, 31) %}
+                      <option value="{{ val }}" {% if nurses and nurses[i-1] and nurses[i-1].max_capacity == val %}selected{% endif %}>{{ val }}</option>
+                    {% endfor %}
+                  </select>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <button type="submit" name="set_nurse_capacity">Nurse Capacity</button>
+        </form>
+
         <form method="POST" action="{{ url_for('index') }}">
             <div style="margin-bottom: 1em;">
                 <label for="max_row_diff"><strong>Maximum Allowed Row Difference for Assigned Patients:</strong></label>
