@@ -16,7 +16,7 @@ ortools==9.6.2534
 packaging==25.0
 pandas==2.0.3
 pluggy==1.5.0
-protobuf==5.29.4
+protobuf==5.29.5
 pyinstaller==6.14.0
 pyinstaller-hooks-contrib==2025.4
 pytest==8.3.5
