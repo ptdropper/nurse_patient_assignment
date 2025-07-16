@@ -33,11 +33,17 @@ def assign_nurses_to_patients(nurses, patients, history, max_row_diff):
             # Only allow assignment if within range
             model.Add(diff <= half_max_row).OnlyEnforceIf(assignments[(nurse['id'], patient['id'])])
 
-    # Each patient assigned to exactly one nurse
-    for patient in patients:
-        model.Add(
-            sum(assignments[(nurse['id'], patient['id'])] for nurse in nurses) == 1
-        )
+        # Each patient assigned to exactly one nurse, unless patient is 'not present' (complexity==0)
+        for patient in patients:
+        if patient['complexity'] > 0:
+            model.Add(
+                sum(assignments[(nurse['id'], patient['id'])] for nurse in nurses) == 1
+            )
+        else:
+            # No nurse should be assigned to this patient if complexity is zero
+            model.Add(
+                sum(assignments[(nurse['id'], patient['id'])] for nurse in nurses) == 0
+            )
 
     # Solve the model
     solver = cp_model.CpSolver()
