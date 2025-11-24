@@ -41,6 +41,6 @@ nurse_scheduler/
 3. View the generated schedule in the console.
 
 ## Dependencies
-- Python 3.8+
+- Python 3.12
 - OR-Tools
 
