@@ -11,7 +11,7 @@ A Python-based solution to suggest nurse-patient assignments for the next shift 
 
 ## Features
 - Assigns nurses to patients and rooms while respecting complexity and capacity constraints.
-- Prioritizes continuity of care.
+- Prioritizes continuity of care. 
 - Generates optimal schedules using Google OR-Tools.
 
 ## Project Structure
