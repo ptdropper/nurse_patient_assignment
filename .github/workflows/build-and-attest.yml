@@ -35,7 +35,15 @@ jobs:
 
       - name: Build Python package artifact
         run: python -m build         # This creates dist/*.whl and dist/*.tar.gz
-
+      
+      - name: Upload built artifacts for download
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-dist
+          path: dist/*
+          if-no-files-found: error  # Fail if dist/ is empty (safety)
+          retention-days: 30        # Optional: how long to keep (default 90 for public repos)
+          
       - name: Attest build provenance
         uses: actions/attest-build-provenance@v3.2.0  # Latest stable version
         with:
