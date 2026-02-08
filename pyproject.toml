@@ -1,2 +1,16 @@
 [tool.pytest.ini_options]
 pythonpath = ["."]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nurse_patient_assignment"
+version = "2.0.7"
+
+description = "Nurse-Patient Assignment Scheduler using OR-Tools and Flask"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Robert Smigielski", email = "ptdropper@gmail.com"}]
+requires-python = ">=3.12"
