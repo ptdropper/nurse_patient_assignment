@@ -12,7 +12,7 @@ def load_data():
 
 if __name__ == "__main__":
     nurses, patients, history = load_data()
-    schedule = scheduler.assign_nurses_to_patients(nurses, patients, history)
+    schedule = scheduler.assign_nurses_to_patients(nurses, patients, history, max_row_diff=2)
     print("Schedule for Tomorrow:")
     for entry in schedule:
         print(f"{entry['nurse']} -> Patients: {entry['patients']}")
