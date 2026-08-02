@@ -1,4 +1,4 @@
-setuptools==79.0.0
+setuptools==83.0.0
 absl-py==2.2.2
 altgraph==0.17.4
 blinker==1.8.2
