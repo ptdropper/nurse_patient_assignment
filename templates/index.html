@@ -13,6 +13,10 @@
 
         <h2>Set Nurse Maximum Capacity</h2>
         <form method="POST" action="{{ url_for('nurse_capacity') }}">
+          <div style="margin-bottom: 1em;">
+            <label for="nurse_count"><strong>Number of nurses:</strong></label>
+            <input type="number" id="nurse_count" name="nurse_count" min="1" max="20" value="{{ nurse_count }}" style="width: 80px;">
+          </div>
           <table>
             <thead>
               <tr>
@@ -22,7 +26,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for i in range(1, 7) %}
+              {% for i in range(1, nurse_count + 1) %}
               <tr>
                 <td>{{ i }}</td>
                 <td>
@@ -39,7 +43,7 @@
               {% endfor %}
             </tbody>
           </table>
-          <button type="submit" name="set_nurse_capacity">Nurse Capacity</button>
+          <button type="submit" name="set_nurse_capacity">Save Nurses</button>
         </form>
 
         <form method="POST" action="{{ url_for('index') }}">
@@ -141,7 +145,7 @@
 </body>
 
 <footer>
-  Version: {{ version }}
+   Version: {{ version }}
 </footer>
 
 
