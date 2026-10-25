@@ -7,7 +7,7 @@ from scheduler.utils import save_schedule
 def test_save_schedule(mock_file):
     schedule = [{"nurse": "Nurse A", "patients": [1, 2]}]
     save_schedule(schedule)
-    mock_file.assert_called_once_with('data/schedule.json', 'w')
+    mock_file.assert_called_once_with('../data/schedule.json', 'w+')
 
 
 #class MyTestCase(unittest.TestCase):

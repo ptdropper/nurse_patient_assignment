@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import os, json
 from scheduler.solver import load_data
 from scheduler.scheduler import assign_nurses_to_patients
@@ -74,9 +74,11 @@ def index():
             complexity = request.form.get(f"complexity_{patient['id']}")
             if complexity:
                 patient['complexity'] = int(complexity)
-        room_distance_max = request.form.get(f"room_distance_max_{patient['id']}")
+            room_distance_max = request.form.get(f"room_distance_max_{patient['id']}")
+            if room_distance_max is not None:
+                patient['room_distance_max'] = int(room_distance_max)
         # Save updated patient data
-        save_schedule(patients, filename="data/patients.json")
+        save_schedule(patients, filename="../data/patients.json")
 
         # Generate the schedule
         try:
