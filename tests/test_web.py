@@ -33,9 +33,9 @@ def test_index_post(mock_save_schedule, mock_assign_nurses, mock_load_data, clie
     mock_assign_nurses.assert_called_once()
 
 
-# def test_index_post_invalid_data(client):
-#    response = client.post('/', data={'max_row_diff': '0'})
-#    assert response.status_code == 200
+def test_index_post_invalid_data(client):
+    response = client.post('/', data={'max_row_diff': '0'})
+    assert response.status_code == 200
 
 if __name__ == '__main__':
     unittest.main()
