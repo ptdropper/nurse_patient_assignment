@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import os, json
 from scheduler.solver import load_data
 from scheduler.scheduler import assign_nurses_to_patients
@@ -12,29 +12,45 @@ NURSES_JSON_PATH = "data/nurses.json"
 def load_nurses():
     if os.path.exists(NURSES_JSON_PATH):
         with open(NURSES_JSON_PATH, "r") as f:
-            return json.load(f)
-    # Default: collection of nurses with blank names and 0 capacity
-    return [{"name": "", "max_capacity": 0} for _ in range(6)]
+            nurses = json.load(f)
+        if nurses:
+            return nurses
+    return [{"id": 1, "name": "Nurse 1", "max_capacity": 0}]
 
 def save_nurses(nurses):
     with open(NURSES_JSON_PATH, "w") as f:
         json.dump(nurses, f, indent=2)
 
+
+def normalize_nurses(nurses, count):
+    existing = {int(n.get("id", idx + 1)): n for idx, n in enumerate(nurses)}
+    normalized = []
+    for i in range(1, count + 1):
+        current = existing.get(i, {})
+        normalized.append({
+            "id": i,
+            "name": current.get("name") or f"Nurse {i}",
+            "max_capacity": int(current.get("max_capacity", 0) or 0),
+        })
+    return normalized
+
 @app.route("/nurse_capacity", methods=["POST"])
 def nurse_capacity():
-    nurses = []
+    try:
+        nurse_count = int(request.form.get("nurse_count", 6))
+    except (TypeError, ValueError):
+        nurse_count = 6
+    nurse_count = max(1, min(20, nurse_count))
 
-    for i in range(1, 7):
+    nurses = normalize_nurses(load_nurses(), nurse_count)
+    for i in range(1, nurse_count + 1):
         name = request.form.get(f"nurse_name_{i}", f"Nurse {i}")
         try:
             max_capacity = int(request.form.get(f"nurse_capacity_{i}", 0))
         except (ValueError, TypeError):
             max_capacity = 0
-        nurses.append({
-            "id": i,
-            "name": name,
-            "max_capacity": max_capacity
-        })
+        nurses[i - 1]["name"] = name
+        nurses[i - 1]["max_capacity"] = max_capacity
     save_nurses(nurses)
     # Redirect to the index page after saving
     return redirect(url_for("index"))
@@ -59,6 +75,8 @@ def index():
 
     # Load data
     nurses, patients, history = load_data()
+    nurse_count = len(nurses) if nurses else 6
+
     # Get max_row_diff from form, default to 1 if not set
     if request.method == 'POST':
         try:
@@ -82,17 +100,16 @@ def index():
         try:
             schedule = assign_nurses_to_patients(nurses, patients, history, max_row_diff=max_row_difference)
             return render_template("index.html", patients=patients, schedule=schedule, success=True,
-                                   max_row_diff=max_row_difference, version=version, nurses=nurses)
+                                   max_row_diff=max_row_difference, version=version, nurses=nurses,
+                                   nurse_count=nurse_count)
         except Exception as e:
             # Log the error for debugging
             print(f"Error during scheduling: {e}")
 
-            #return render_template("index.html", patients=patients, schedule=[], error=str(e),
-            #                       max_row_diff=max_row_difference, version=version, nurses=nurses)
-    
     # Render the page with default data
     return render_template("index.html", patients=patients, schedule=[],
-                           max_row_diff=max_row_difference, version=version, nurses=nurses)
+                           max_row_diff=max_row_difference, version=version, nurses=nurses,
+                           nurse_count=nurse_count)
 
 
 if __name__ == "__main__":
