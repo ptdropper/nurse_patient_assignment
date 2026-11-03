@@ -96,7 +96,7 @@ def index():
             if room_distance_max is not None:
                 patient['room_distance_max'] = int(room_distance_max)
         # Save updated patient data
-        save_schedule(patients, filename="../data/patients.json")
+        save_schedule(patients, filename="data/patients.json")
 
         # Generate the schedule
         try:

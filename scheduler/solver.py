@@ -7,9 +7,9 @@ DATA_DIR: str = dirname(__file__)
 def load_data():
     with open(join(DATA_DIR, '../data/nurses.json')) as f:
         nurses_data = json.load(f)
-    with open('../data/patients.json') as f:
+    with open('data/patients.json') as f:
         patients_data = json.load(f)
-    with open('../data/history.json') as f:
+    with open('data/history.json') as f:
         history_data = json.load(f)
     return nurses_data, patients_data, history_data
 
