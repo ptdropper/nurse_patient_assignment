@@ -14,6 +14,12 @@ A Python-based solution to suggest nurse-patient assignments for the next shift 
 - Prioritizes continuity of care. 
 - Generates optimal schedules using Google OR-Tools.
 
+In plain terms:
+
+- This is a hospital staffing / bed-to-nurse assignment prototype.
+- It aims to balance workload and keep assignments physically close together by room/row, while respecting complexity
+  and capacity.
+
 ## Project Structure
 ```plaintext
 nurse_scheduler/

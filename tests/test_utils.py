@@ -1,14 +1,15 @@
 import unittest
-
-from unittest.mock import mock_open, patch
+import json
 from scheduler.utils import save_schedule
 
-@patch("builtins.open", new_callable=mock_open)
-def test_save_schedule(mock_file):
-    schedule = [{"nurse": "Nurse A", "patients": [1, 2]}]
-    save_schedule(schedule)
-    mock_file.assert_called_once_with('../data/schedule.json', 'w+')
 
+def test_save_schedule_writes_json_to_requested_path(tmp_path):
+    schedule = [{"nurse": "Nurse A", "patients": [1, 2]}]
+    output_file = tmp_path / "schedule.json"
+
+    save_schedule(schedule, filename=output_file)
+
+    assert json.loads(output_file.read_text(encoding="utf-8")) == schedule
 
 #class MyTestCase(unittest.TestCase):
 #    def test_something(self):
