@@ -1,17 +1,17 @@
 import json
 from scheduler import scheduler
-from os.path import join, dirname
+from scheduler.paths import HISTORY_FILE, NURSES_FILE, PATIENTS_FILE
 
-DATA_DIR: str = dirname(__file__)
 
 def load_data():
-    with open(join(DATA_DIR, '../data/nurses.json')) as f:
+    with NURSES_FILE.open(encoding="utf-8") as f:
         nurses_data = json.load(f)
-    with open('data/patients.json') as f:
+    with PATIENTS_FILE.open(encoding="utf-8") as f:
         patients_data = json.load(f)
-    with open('data/history.json') as f:
+    with HISTORY_FILE.open(encoding="utf-8") as f:
         history_data = json.load(f)
     return nurses_data, patients_data, history_data
+
 
 if __name__ == "__main__":
     nurses, patients, history = load_data()
